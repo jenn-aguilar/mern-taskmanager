@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useTaskContext } from "../hooks/useTaskContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 import TaskDetails from '../components/TaskDetails';
 import TaskForm from '../components/TaskForm';
@@ -8,10 +9,15 @@ import TaskForm from '../components/TaskForm';
 const Home = () => {
     // const [ tasks, setTasks ] = useState(null);
     const {tasks, dispatch} = useTaskContext();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const fetchTasks = async () => {
-            const response = await fetch('http://localhost:4000/api/tasks');
+            const response = await fetch('/api/tasks', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
             const json = await response.json(); // array of objects
 
             if (response.ok) {
@@ -21,8 +27,10 @@ const Home = () => {
 
         }
 
-        fetchTasks();
-    }, [dispatch])
+        if (user) {
+            fetchTasks();
+        }
+    }, [dispatch, user])
     
     return (
         <div className="home">
