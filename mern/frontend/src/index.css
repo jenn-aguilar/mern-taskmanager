@@ -57,12 +57,12 @@ header a {
   color: #555;
 }
 .task-details span {
-  position: absolute;
-  top: 20px;
+  position: relative;
   right: 20px;
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
+  margin: 20px;
   border-radius: 50%;
   color: #333;
 }
