@@ -119,16 +119,19 @@ const TaskForm = ({ taskToEdit, clearEdit }) => {
             />
 
             <label>Status:</label>
-            <input
-                type="text" 
-                onChange={(e) => setStatus(e.target.value)}
+            <select
                 value={status}
+                onChange={(e) => setStatus(e.target.value)}
                 className={emptyFields.includes('status') ? 'error' : ''}
-            />
+            >
+                <option value="To Do" selected>To Do</option>
+                <option value="In progress">In progress</option>
+                <option value="Done">Done</option>
+            </select>
 
             <label>Priority (1-Highest, 5-Lowest):</label>
             <input
-                type="number" 
+                type="number" max="5"
                 onChange={(e) => setPriority(e.target.value)}
                 value={priority}
             />
